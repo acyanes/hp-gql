@@ -1,7 +1,8 @@
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
-import { resolvers } from './resolvers';
-import { HpAPI } from './hp-api';
+import { resolvers } from './resolver.js';
+import { typeDefs } from './typeDefs.js';
+import { HpAPI } from './hp-api.js';
 
 interface ContextValue {
   dataSources: {
@@ -9,17 +10,6 @@ interface ContextValue {
   };
 }
 
-const typeDefs = `#gql
-type Character {
-    name: String!
-    gender: String!
-    house: String!
-}
-
-type Query {
-    characters: [Character]
-}
-`;
 const server = new ApolloServer<ContextValue>({
   typeDefs,
   resolvers,
